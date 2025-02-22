@@ -1,7 +1,7 @@
 <template>
   <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" size="large">
     <el-form-item prop="username">
-      <el-input v-model="loginForm.username" placeholder="用户名： admin">
+      <el-input v-model="loginForm.username" placeholder="请输入用户名">
         <template #prefix>
           <el-icon class="el-input__icon">
             <user />
@@ -13,7 +13,7 @@
       <el-input
         v-model="loginForm.password"
         type="password"
-        placeholder="密码： sz123456"
+        placeholder="请输入密码"
         show-password
         autocomplete="new-password"
       >
@@ -30,7 +30,7 @@
     <el-button :icon="UserFilled" round size="large" type="primary" :loading="loading" @click="login"> 登录 </el-button>
   </div>
   <div v-if="IS_PREVIEW" style="margin-top: 20px; color: var(--el-color-warning)">
-    <span>如无法登陆请联系作者：feiyuchuixue@163.com</span>
+    <span>如无法登陆请联系作者：pridesweit@qq.com</span>
   </div>
   <SliderCaptcha ref="captchaRef" @success="onSliderSuccess" @close="onCaptchaClose" />
 </template>
