@@ -88,7 +88,7 @@ const performLogin = async () => {
     router.push(HOME_URL);
     ElNotification({
       title: getTimeState(),
-      message: '欢迎登录 Sz-Admin',
+      message: '欢迎登录 Syrcb-System',
       type: 'success',
       duration: 3000
     });

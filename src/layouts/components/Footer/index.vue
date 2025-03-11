@@ -1,7 +1,7 @@
 <template>
   <div class="footer flx-center">
-    <a href="https://szadmin.cn" target="_blank">
-      Sz-Admin v{{ version }} | Copyright © 2022-{{ new Date().getFullYear() }} 升职哦（sz）
+    <a href="https://patienyon.cn" target="_blank">
+      Syrcb-System v{{ version }} | Copyright © 2024-{{ new Date().getFullYear() }} Patienyon
     </a>
   </div>
 </template>

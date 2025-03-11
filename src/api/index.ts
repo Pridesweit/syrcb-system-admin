@@ -17,7 +17,10 @@ export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 
 const config = {
   // 默认地址请求地址，可在 .env.** 文件中修改
-  baseURL: import.meta.env.VITE_API_URL as string,
+  // baseURL: import.meta.env.VITE_API_URL as string,
+  baseURL: "http://127.0.0.1:9991/api" as string,
+
+
   // 设置超时时间，默认超时时间60s
   timeout: import.meta.env.VITE_APP_HTTP_TIMEOUT || 60000
   // 跨域时候允许携带凭证

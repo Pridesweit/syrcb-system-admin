@@ -194,26 +194,46 @@
         </el-select>
       </el-form-item>
       <el-form-item label="贷款视频路径" prop="loanVideoPath">
+        <template #default="{ row }">
         <el-input
           v-model="paramsProps.row.loanVideoPath"
           placeholder="请填写贷款视频路径"
           clearable
-        ></el-input>
+        >
+        <template #append>
+        <el-button icon="el-icon-folder-opened" @click="openFolderDialog(paramsProps.row,1)"></el-button>
+      </template>
+    </el-input>
+  </template>
       </el-form-item>
+    
       <el-form-item label="电话录音路径" prop="telRecordingPath">
+        <template #default="{ row }">
         <el-input
           v-model="paramsProps.row.telRecordingPath"
           placeholder="请填写电话录音路径"
           clearable
-        ></el-input>
+        ><template #append>
+        <el-button icon="el-icon-folder-opened"  @click="openFolderDialog(paramsProps.row,2)"></el-button>
+      </template>
+    </el-input>
+    </template>
+ 
       </el-form-item>
+      
       <el-form-item label="贷款资料路径" prop="loanDataPath">
+        <template #default="{ row }">
         <el-input
           v-model="paramsProps.row.loanDataPath"
           placeholder="请填写贷款资料路径"
           clearable
-        ></el-input>
+        ><template #append>
+        <el-button icon="el-icon-folder-opened"  @click="openFolderDialog(paramsProps.row,3)"></el-button>
+      </template>
+    </el-input>
+  </template>
       </el-form-item>
+
     </el-form>
     <template #footer>
       <el-button @click="visible = false"> 取消</el-button>
@@ -224,7 +244,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { type ElForm, ElMessage } from 'element-plus'
+import { type ElForm, ElMessage ,ElUpload} from 'element-plus'
 import { useOptionsStore } from '@/stores/modules/options'
 
 defineOptions({
@@ -237,7 +257,7 @@ const rules = reactive({
   customerType: [{ required: true, message: '请填写客户类型' }],
   customerName: [{ required: true, message: '请填写客户名称' }],
   contractId: [{ required: true, message: '请填写合同编号' }],
-  signedDate: [{ required: true, message: '请填写签约日期' }],
+  // signedDate: [{ required: true, message: '请填写签约日期' }],
 })
 
 const visible = ref(false)
@@ -269,6 +289,50 @@ const handleSubmit = () => {
     }
   })
 }
+
+// 定义三个输入框的值
+    const path1 = ref('');
+    const path2 = ref('');
+    const path3 = ref('');
+
+ // 打开文件夹选择对话框
+ const openFolderDialog = (nowPath: any,index:number) => {
+      // 创建一个 input 元素
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.webkitdirectory = true; // 允许选择文件夹
+      input.multiple = false; // 只允许选择一个文件夹
+
+      // 监听文件选择事件
+      input.onchange = (event: Event) => {
+        const target = event.target as HTMLInputElement;
+        if (target.files && target.files.length > 0) {
+          const folderPath = target.files[0].webkitRelativePath.split('/')[0]; // 获取文件夹路径
+          // 根据 index 设置对应的输入框值
+          console.log(folderPath);
+          // nowPath = String(folderPath);
+          if (index === 1) {
+           nowPath.loanVideoPath = String(folderPath);
+          } else if (index === 2) {
+            nowPath.telRecordingPath= String(folderPath);
+          } else if (index === 3) {
+            nowPath.loanDataPath= String(folderPath);
+          }
+          input.value = ''; // 清空 input 的值，避免上传
+        }
+      };
+
+      // 触发文件选择对话框
+      input.click();
+    };
+
+    // return {
+    //   path1,
+    //   path2,
+    //   path3,
+    //   openFolderDialog,
+    // };
+
 
 defineExpose({
   acceptParams
